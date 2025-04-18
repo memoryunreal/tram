@@ -54,6 +54,7 @@ def run_metric_slam(img_folder, masks=None, calib=None, is_static=False):
 
     pred_depths = []
     H, W = get_dimention(img_folder)
+   # H, W = int(H), int(W)
     for t in tqdm(tstamp):
         img = cv2.imread(imgfiles[t])[:,:,::-1]
         img = cv2.resize(img, (W, H))
