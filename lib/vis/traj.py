@@ -14,6 +14,7 @@ def traj_filter(pred_vert_w, pred_j3d_w, sigma=3):
     """ Smooth the root trajetory (xyz) """
     root = pred_j3d_w[:, 0]
     root_smooth = torch.from_numpy(gaussian_filter(root, sigma=sigma, axes=0))
+    # root_smooth = torch.from_numpy(gaussian_filter(root, sigma=sigma))
 
     pred_vert_w = pred_vert_w + (root_smooth - root)[:, None]
     pred_j3d_w = pred_j3d_w + (root_smooth - root)[:, None]
@@ -23,7 +24,9 @@ def cam_filter(cam_r, cam_t, r_sigma=3, t_sigma=15):
     """ Smooth camera trajetory (SO3) """
     cam_q = matrix_to_quaternion(cam_r)
     r_smooth = torch.from_numpy(gaussian_filter(cam_q, sigma=r_sigma, axes=0))
+    # r_smooth = torch.from_numpy(gaussian_filter(cam_q, sigma=r_sigma))
     t_smooth = torch.from_numpy(gaussian_filter(cam_t, sigma=t_sigma, axes=0))
+    # t_smooth = torch.from_numpy(gaussian_filter(cam_t, sigma=t_sigma))
 
     r_smooth = r_smooth / r_smooth.norm(dim=1, keepdim=True)
     r_smooth = quaternion_to_matrix(r_smooth)
