@@ -7,6 +7,7 @@ data/pretrain/*.ckpt
 data/pretrain/*/*.ckpt
 data/smpl/SMPL_*.pkl
 data/*.pkl
+data/pikaqiu/
 *.mov
 *.mp4
 example_video/
